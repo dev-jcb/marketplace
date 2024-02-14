@@ -94,5 +94,17 @@ const remove = async (req, res) => {
     }
 }
 
+const deleteAll = async (req, res) => {
+    try {
+        let deletedProucts = await Product.deleteMany({});
 
-export default {create, getAll, idSearchParam, getById, update, remove};
+        res.status(200).json(deletedProucts);
+    } catch(error) {
+        return res.status(500).json({
+            error: errorHandler.getErrorMessage(error)
+        });
+    }
+}
+
+
+export default {create, getAll, idSearchParam, getById, update, remove, deleteAll};
